@@ -827,3 +827,121 @@ Day 5: 🔄 Coming Soon—Test Design Patterns & Automation Best Practices!
 If you want a section for *tips on sharing or storing trace files*, or a Q&A for common trace viewer confusion, just ask!
 
 ---
+
+Absolutely! Here’s a **detailed README section (Day 5)** describing your Continuous Integration (CI) workflow integration for Playwright Java using GitHub Actions. This section explains the setup, the workflow steps, and thoroughly describes each screenshot to help you and visitors understand the automation pipeline visually and practically.
+
+## 📅 Day 5: 🚦 Continuous Integration with Playwright Java & GitHub Actions
+
+Automating tests is awesome — but **running them automatically** on every push, pull request, or branch makes your automation bulletproof! Today, I integrated my Playwright Java tests with **GitHub Actions** for end-to-end CI.
+
+Now, every code change is automatically checked for quality, stability, and reliability ✔️.
+
+### 🎯 **What Was Implemented**
+
+- 🚀 **CI Pipeline**: GitHub Actions workflow for Playwright Java
+- 🔄 **Automated Test Runs**: On every code push & pull request
+- 🌐 **Cross-Platform**: Executes in a fresh Ubuntu VM
+- ✨ **Full Lifecycle**: Checkout → Java Setup → Install Dependencies → Download Browsers → Run Tests
+- 📦 **Artifacts/Logs**: Test results & trace files available after each run
+
+### 📝 **Workflow File (playwright.yml) Overview**
+
+Your [workflow documentation](https://playwright.dev/java/docs/ci-intro) outlines the steps:
+
+```yaml
+name: Playwright Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Build & Install
+        run: mvn -B install -D skipTests --no-transfer-progress
+      - name: Ensure browsers are installed
+        run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install --with-deps"
+      - name: Run tests
+        run: mvn test
+```
+
+## 🔭 **How the CI Workflow Runs: Step by Step**
+
+1. **GitHub Triggers**  
+   Every push or PR to main/master starts a new workflow run.
+
+2. **Setting Up Environment**
+    - Checks out your latest code
+    - Sets up Java (`temurin` distro, version 17)
+    - Installs Maven dependencies and builds your code
+
+3. **Playwright Browser Setup**
+    - Installs all browsers needed for your Playwright tests automatically in the fresh environment
+
+4. **Test Execution**
+    - Runs your entire test suite using `mvn test`
+    - Collects results, logs, and trace files for later inspection
+
+## 🖼️ **Screenshots: CI Workflow In Action**
+
+### 1️⃣ **Workflow Dashboard Overview**
+
+![CI Workflow Status](resources/images/CIWorkFlow1.png)
+This screenshot displays the **GitHub Actions tab** for your repository.
+- The current and past workflow runs are shown (with green ticks for success, red crosses for failure).
+- Insight into each pipeline event (e.g., push, PR) and which branches triggered it.
+- See at-a-glance which commits are healthy and which need fixes.
+
+### 2️⃣ **Drilling into a Successful Workflow Run**
+
+![CI Workflow Steps](resources/images/CIWorkFlow2.png)
+Here you can see the expanded details of a **single workflow run**:
+- **Step-by-step breakdown:** Covers actions like setting up Java, installing dependencies, downloading browsers, and running Playwright tests.
+- **Success Badges:** Every completed action has a green check, indicating it finished successfully.
+- **Job Duration:** Time taken for each step, helping to diagnose slowdowns in the pipeline.
+
+### 3️⃣ **Test Logs & Output Details**
+
+![CI Test Logs and Output](resources/images/CIWorkFlow3.png)
+This shows the **real-time log output** for your Playwright test job:
+- **Expanded “Run tests” Step:** View detailed console output and logs from Maven and Playwright.
+- **Everything Tracked:** Test run progress, success/failure messages, and assertions.
+- **Debug with Ease:** If a test fails, error details are here for rapid troubleshooting.
+
+## 💡 **Why CI Integration Matters**
+
+- 🛡️ **Instant Feedback:** Know immediately if a change breaks your codebase—before it reaches production!
+- 🤝 **Team Collaboration:** PRs, branches, and merges are automatically validated for every developer.
+- ⏱️ **No Manual Effort:** Automated, repeatable, and platform-independent—no matter your OS or local setup.
+- 🕵️ **Traceability:** Historical logs, artifacts, and traces available forever: great for audits, learning, and rollback.
+
+### 🔮 **What’s Next?**
+
+> 📦 **Artifact Handling:** Uploading trace files and result reports after CI runs  
+> 🏗️ **CI Best Practices:** Parallel test execution, test matrix (multiple JDKs/browsers/platforms)  
+> 🔒 **Secrets Management:** Secure handling of tokens, credentials, etc.
+
+## 📈 **Progress Tracker**
+
+```
+Day 1: ✅ Setup & Installation  
+Day 2: ✅ First Test & Browser Mastery  
+Day 3: ✅ Input & Forms Automation  
+Day 4: ✅ Debugging with Trace Viewer  
+Day 5: ✅ CI Integration with GitHub Actions  
+Day 6: 🔄 Next — Artifacts, Advanced Test Management!
+```
+
+**🎉 With CI integration, every code push is validated instantly—catching bugs early and building trust in your automation pipeline! Automation just leveled up.**
+
+---
