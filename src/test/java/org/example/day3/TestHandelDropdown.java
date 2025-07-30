@@ -24,7 +24,7 @@ public class TestHandelDropdown {
                             .setChannel("chrome") // Use Chrome browser
                             .setArgs(singletonList("--start-maximized")) // Start browser maximized
                             .setTimeout(6000) // Set timeout to 60 seconds
-                            .setHeadless(false) // Run in headful mode
+                            .setHeadless(true) // Run in headful mode
                             .setSlowMo(60) // Slow down operations by 50ms
             );
             page = browser.newPage();

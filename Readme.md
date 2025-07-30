@@ -759,7 +759,7 @@ All user actions, screenshots, DOM snapshots, and source maps get packed into on
 
 After your test, run this command:
 ```bash
-npx playwright show-trace E:\AllBackup\GitHub\PlaywrightJavaTutorial\target\trace.zip
+ npx playwright show-trace target\trace.zip
 ```
 This launches an interactive visual dashboard. Explore each action in detail—like an automated black box recorder for your tests!
 
