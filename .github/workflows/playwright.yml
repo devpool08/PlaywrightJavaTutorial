@@ -21,6 +21,6 @@ jobs:
     # Run the intentionally failing screenshot test, ignoring its failure
     - name: Run intentionally failing screenshot test
       run: mvn test -Dtest=org.example.day4.TestScreenshots#takeScreenshot -Dmaven.test.failure.ignore=true
-    # Run all other tests, excluding the intentionally failing one
-    - name: Run remaining tests
-      run: mvn test -Dtest='!org.example.day4.TestScreenshots#takeScreenshot'
+    # 2. Run all other tests, exclude the entire TestScreenshots class
+    - name: Run remaining tests (excluding TestScreenshots)
+      run: mvn test -Dtest='*' -Dsurefire.excludedTests=org.example.day4.TestScreenshots
