@@ -18,10 +18,9 @@ jobs:
       run: mvn -B install -D skipTests --no-transfer-progress
     - name: Ensure browsers are installed
       run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install --with-deps"
-    # Run the intentionally failing test separately and ignore its failure
+    # Run the intentionally failing screenshot test, ignoring its failure
     - name: Run intentionally failing screenshot test
-      run: mvn -Dtest=org.example.day4.TestScreenshots#takeScreenshot test
-      continue-on-error: true
+      run: mvn test -Dtest=org.example.day4.TestScreenshots#takeScreenshot -Dmaven.test.failure.ignore=true
     # Run all other tests, excluding the intentionally failing one
     - name: Run remaining tests
       run: mvn test -Dtest='!org.example.day4.TestScreenshots#takeScreenshot'
