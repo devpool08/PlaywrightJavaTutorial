@@ -20,7 +20,7 @@ public class TestLunchBrowser {
                         .setTimeout(60000) // Set timeout to 60 seconds
                         //.setDevtools(true) // Open DevTools automatically
                         //.setExecutablePath(Paths.get("/path/to/chrome")) // Specify the path to Chrome executable
-                        .setHeadless(false) // Run in headful mode
+                        .setHeadless(true) // Run in headful mode
                         .setSlowMo(50) // Slow down operations by 50ms
 
         );

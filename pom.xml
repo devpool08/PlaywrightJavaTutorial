@@ -48,10 +48,29 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.10.1</version>
-        <!-- References to interface static methods are allowed only at source level 1.8 or above -->
         <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
+          <source>17</source> <!-- Replace with your JDK version -->
+          <target>17</target> <!-- Replace with your JDK version -->
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>1.18.36</version>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-maven</artifactId>
+        <version>2.10.0</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.2.5</version> <!-- or your version -->
+        <configuration>
+          <argLine>--add-opens java.base/java.lang=ALL-UNNAMED</argLine>
         </configuration>
       </plugin>
     </plugins>
