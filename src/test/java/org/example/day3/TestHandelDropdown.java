@@ -1,17 +1,12 @@
 package org.example.day3;
 
 import com.microsoft.playwright.*;
-import com.microsoft.playwright.options.SelectOption;
 import lombok.extern.log4j.Log4j2;
 import org.example.base.BaseTest;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.nio.file.Paths;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
-import static java.util.Collections.singletonList;
 
 @Log4j2
 public class TestHandelDropdown extends BaseTest {

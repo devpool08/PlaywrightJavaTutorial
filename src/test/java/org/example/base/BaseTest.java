@@ -2,13 +2,12 @@ package org.example.base;
 
 import com.microsoft.playwright.*;
 import lombok.extern.log4j.Log4j2;
+import org.example.utils.ScreenshotAndTraceUtil;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 
-import java.nio.file.Paths;
-
-import static java.nio.file.Files.createDirectories;
 import static java.util.Collections.singletonList;
 
 @Log4j2
@@ -17,10 +16,12 @@ public class BaseTest {
     protected Browser browser;
     protected Page page;
     protected BrowserContext context;
+    protected Page.ScreenshotOptions screenshotOptions;
+
     @BeforeClass
     public void setup() {
-        try{
-            playwright= Playwright.create();
+        try {
+            playwright = Playwright.create();
             browser = playwright.chromium().launch(
                     new BrowserType.LaunchOptions()
                             .setChannel("chrome") // Use Chrome browser
@@ -36,23 +37,32 @@ public class BaseTest {
                     .setSnapshots(true)
                     .setSources(true));
             page = context.newPage();// Create a new page in the context
+            screenshotOptions = new Page.ScreenshotOptions();
+            log.info("🚀 Playwright setup complete! Ready to rock and roll with the browser! 🎉");
         } catch (Exception e) {
             log.error("💥 Oops! Something went kaboom during setup! 😱 Error: {}", e.getMessage());
             throw e;
         }
     }
+    @AfterMethod
+    public void captureScreenshotAndTraceIfFailed(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            try {
+                // Check if the test failed
+                if (result.getStatus() == ITestResult.FAILURE) {
+                    ScreenshotAndTraceUtil.captureScreenshotAndTraceIfFailed(page, context, screenshotOptions,this.getClass().getSimpleName(),result);
+                    log.info("📸 Screenshot captured and trace saved for failed test! 📂 Check target/traces and target/screenshots for details! 🗂️");
+                }
+            } catch (Exception e) {
+                log.error("💥 Oops! Something went wrong while taking the screenshot! 😱 Error: {}", e.getMessage());
+            }
+        }
+    }
+
     @AfterClass
     public void tearDown() {
-        try{
-            //if traces folder does not exist, create it
-            createDirectories(Paths.get("target/traces"));
-            // Stop tracing and save to a ZIP file
-            String className = this.getClass().getSimpleName();
-            String path = "target/traces/" + className + ".zip";
-            context.tracing().stop(new Tracing.StopOptions()
-                    .setPath(Paths.get(path)));
-            log.info("🏁 All tests completed! Time to wrap things up! 🎉");
-            if(context != null) {
+        try {
+            if (context != null) {
                 context.close();
                 log.info("🗂️ Context closed like a pro! No more shenanigans in this playground! 🎠");
             }

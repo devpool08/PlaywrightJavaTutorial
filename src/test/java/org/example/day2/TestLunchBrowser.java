@@ -5,7 +5,6 @@ import org.example.base.BaseTest;
 import org.testng.annotations.Test;
 
 
-import java.util.Collections;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
@@ -20,8 +19,5 @@ public class TestLunchBrowser extends BaseTest {
         Locator loginButton = page.locator("//span[normalize-space()='Login']");
         loginButton.click();
         assertThat(page).hasTitle("Account Login");
-//        page.close();// Close the current page
-//        browser.close();// Close the browser instance
-//        playwright.close(); // Close Playwright instance
     }
 }
