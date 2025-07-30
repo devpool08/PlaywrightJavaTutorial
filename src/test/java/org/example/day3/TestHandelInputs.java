@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+import static java.util.Collections.singletonList;
 
 @SuppressWarnings({"deprecation"})
 @Log4j2
@@ -22,7 +23,7 @@ public class TestHandelInputs {
             browser = playwright.chromium().launch(
                     new BrowserType.LaunchOptions()
                             .setChannel("chrome") // Use Chrome browser
-                            .setArgs(java.util.Collections.singletonList("--start-maximized")) // Start browser maximized
+                            .setArgs(singletonList("--start-maximized")) // Start browser maximized
                             .setTimeout(6000) // Set timeout to 60 seconds
                             .setHeadless(false) // Run in headful mode
                             .setSlowMo(60) // Slow down operations by 50ms
