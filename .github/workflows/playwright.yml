@@ -23,4 +23,4 @@ jobs:
       run: mvn test -Dtest=org.example.day4.TestScreenshots#takeScreenshot -Dmaven.test.failure.ignore=true
     # 2. Run all other tests, exclude the entire TestScreenshots class
     - name: Run remaining tests (excluding TestScreenshots)
-      run: mvn test -Dtest='*' -Dsurefire.excludedTests=org.example.day4.TestScreenshots
+      run: mvn test -Dsurefire.excludes=**/TestScreenshots.java
