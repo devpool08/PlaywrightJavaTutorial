@@ -830,7 +830,7 @@ If you want a section for *tips on sharing or storing trace files*, or a Q&A for
 
 Absolutely! Here’s a **detailed README section (Day 5)** describing your Continuous Integration (CI) workflow integration for Playwright Java using GitHub Actions. This section explains the setup, the workflow steps, and thoroughly describes each screenshot to help you and visitors understand the automation pipeline visually and practically.
 
-## 📅 Day 5: 🚦 Continuous Integration with Playwright Java & GitHub Actions
+## 📅 Day 4 (continue..): 🚦 Continuous Integration with Playwright Java & GitHub Actions
 
 Automating tests is awesome — but **running them automatically** on every push, pull request, or branch makes your automation bulletproof! Today, I integrated my Playwright Java tests with **GitHub Actions** for end-to-end CI.
 
@@ -912,7 +912,7 @@ Here you can see the expanded details of a **single workflow run**:
 
 ### 3️⃣ **Test Logs & Output Details**
 
-![CI Test Logs and Output](resources/images/CIWorkFlow3.png)
+![CI Test Logs and Output](resources/images/CIWorkflow3.png)
 This shows the **real-time log output** for your Playwright test job:
 - **Expanded “Run tests” Step:** View detailed console output and logs from Maven and Playwright.
 - **Everything Tracked:** Test run progress, success/failure messages, and assertions.
@@ -937,9 +937,8 @@ This shows the **real-time log output** for your Playwright test job:
 Day 1: ✅ Setup & Installation  
 Day 2: ✅ First Test & Browser Mastery  
 Day 3: ✅ Input & Forms Automation  
-Day 4: ✅ Debugging with Trace Viewer  
-Day 5: ✅ CI Integration with GitHub Actions  
-Day 6: 🔄 Next — Artifacts, Advanced Test Management!
+Day 4: ✅ Debugging with Trace Viewer and CI Integration with GitHub Actions  
+
 ```
 
 **🎉 With CI integration, every code push is validated instantly—catching bugs early and building trust in your automation pipeline! Automation just leveled up.**
