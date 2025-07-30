@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" name="E:/AllBackup/GitHub/PlaywrightJavaTutorial" parallel="classes">
+        <classes>
+            <class name="org.example.day2.TestLunchBrowser">
+                <methods>
+                    <include name="testLunchBrowser"/>
+                </methods>
+            </class>
+            <class name="org.example.day3.TestHandelDropdown">
+                <methods>
+                    <include name="testHandleDropdown"/>
+                </methods>
+            </class>
+            <class name="org.example.day3.TestHandelInputs">
+                <methods>
+                    <include name="testHandleSimpleInputBox"/>
+                    <include name="testHandleTwoWayDataBinding"/>
+                    <include name="testGetInputValueAndAttribute"/>
+                    <include name="testHandelCheckboxAndRadioButton"/>
+                </methods>
+            </class>
+            <class name="org.example.day4.TestTraceViewer">
+                <methods>
+                    <include name="testTraceViewer"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
