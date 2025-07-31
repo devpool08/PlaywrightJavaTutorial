@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest]
 
     steps:
       - uses: actions/checkout@v4
@@ -39,21 +39,12 @@ jobs:
       - name: Build & Install
         run: mvn -B install -DskipTests --no-transfer-progress
 
-      # Fixed Windows browser installation
-      - name: Install browsers (Windows)
-        if: runner.os == 'Windows'
-        run: |
-          mvn exec:java -e "-Dexec.mainClass=com.microsoft.playwright.CLI" "-Dexec.args=install --with-deps"
-        shell: cmd
-
-      - name: Install browsers (Unix)
-        if: runner.os != 'Windows'
+      - name: Install browsers
         run: mvn exec:java -e -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install --with-deps"
 
       # Ensure allure-results directory exists
       - name: Create Allure results directory
         run: mkdir -p target/allure-results
-        shell: bash
 
       - name: Run intentionally failing screenshot test
         run: mvn test -Dtest=org.example.day4.TestScreenshots#takeScreenshot -Dmaven.test.failure.ignore=true
@@ -71,7 +62,7 @@ jobs:
           path: target/allure-results/
           retention-days: 20
 
-  # Fixed report generation job
+  # Generate and publish Allure report
   publish-report:
     runs-on: ubuntu-latest
     needs: test
@@ -122,7 +113,7 @@ jobs:
             cp -r gh-pages-history/allure-history/* allure-history/ || true
           fi
 
-      # Generate Allure report using a more reliable action
+      # Generate Allure report
       - name: Generate Allure Report
         uses: simple-elf/allure-report-action@master
         if: always()
@@ -144,42 +135,3 @@ jobs:
         id: deployment
         if: always()
         uses: actions/deploy-pages@v2
-
-  # Alternative: Deploy using peaceiris action (if the above doesn't work)
-  deploy-alternative:
-    runs-on: ubuntu-latest
-    needs: test
-    if: failure() && always()  # Only runs if the main publish-report job fails
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Download all artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: allure-results-combined
-
-      - name: Combine results
-        run: |
-          mkdir -p combined-allure-results
-          find allure-results-combined -type f | while read file; do
-            cp "$file" combined-allure-results/ || true
-          done
-
-      - name: Generate Allure Report (Alternative)
-        run: |
-          # Install Allure
-          wget https://github.com/allure-framework/allure2/releases/download/2.25.0/allure-2.25.0.tgz
-          tar -xzf allure-2.25.0.tgz
-          sudo mv allure-2.25.0 /opt/allure
-          sudo ln -s /opt/allure/bin/allure /usr/bin/allure
-          
-          # Generate report
-          allure generate combined-allure-results -o allure-report --clean
-
-      - name: Deploy with peaceiris
-        uses: peaceiris/actions-gh-pages@v3
-        if: always()
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: allure-report
