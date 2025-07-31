@@ -1,6 +1,8 @@
 package org.example.day4;
 
 
+import io.qameta.allure.*;
+import jdk.jfr.Category;
 import lombok.extern.log4j.Log4j2;
 import org.example.base.BaseTest;
 import org.testng.annotations.Test;
@@ -10,6 +12,11 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 
 @SuppressWarnings("deprecation")
 @Log4j2
+@Epic("Trace Viewer Tests")
+@Feature("Trace Viewer")
+@Story("Tester can view traces of their actions on the page")
+@Severity(SeverityLevel.MINOR)
+@Category("Regression")
 public class TestTraceViewer extends BaseTest {
     @Test
     public void openPage() {

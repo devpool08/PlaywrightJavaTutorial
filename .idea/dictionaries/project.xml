@@ -2,7 +2,15 @@
   <dictionary name="project">
     <words>
       <w>addmessage</w>
+      <w>deps</w>
+      <w>dexec</w>
+      <w>dmaven</w>
+      <w>dskip</w>
+      <w>dsurefire</w>
+      <w>dtest</w>
       <w>ortonikc</w>
+      <w>peaceiris</w>
+      <w>temurin</w>
     </words>
   </dictionary>
 </component>

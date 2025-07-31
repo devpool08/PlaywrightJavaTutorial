@@ -1,6 +1,8 @@
 package org.example.day3;
 
 import com.microsoft.playwright.*;
+import io.qameta.allure.*;
+import jdk.jfr.Category;
 import lombok.extern.log4j.Log4j2;
 import org.example.base.BaseTest;
 import org.testng.annotations.Test;
@@ -9,6 +11,11 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 
 @SuppressWarnings({"deprecation"})
 @Log4j2
+@Epic("Handle Inputs")
+@Feature("Handle Inputs")
+@Story("Tester can handle simple input boxes, two-way data binding, and checkboxes/radio buttons")
+@Severity(SeverityLevel.NORMAL)
+@Category("Sanity")
 public class TestHandelInputs extends BaseTest {
     @Test
     public void openPage() {

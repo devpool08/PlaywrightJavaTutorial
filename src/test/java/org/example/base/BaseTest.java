@@ -4,9 +4,7 @@ import com.microsoft.playwright.*;
 import lombok.extern.log4j.Log4j2;
 import org.example.utils.ScreenshotAndTraceUtil;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.*;
 
 import static java.util.Collections.singletonList;
 
@@ -17,7 +15,6 @@ public class BaseTest {
     protected Page page;
     protected BrowserContext context;
     protected Page.ScreenshotOptions screenshotOptions;
-
     @BeforeClass
     public void setup() {
         try {

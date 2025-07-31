@@ -1,6 +1,8 @@
 package org.example.day3;
 
 import com.microsoft.playwright.*;
+import io.qameta.allure.*;
+import jdk.jfr.Category;
 import lombok.extern.log4j.Log4j2;
 import org.example.base.BaseTest;
 import org.testng.annotations.Test;
@@ -9,6 +11,11 @@ import org.testng.annotations.Test;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 @Log4j2
+@Epic("Handle Dropdowns")
+@Feature("Handle Dropdowns")
+@Story("Tester can handle single and multi-select dropdowns")
+@Severity(SeverityLevel.NORMAL)
+@Category("Sanity")
 public class TestHandelDropdown extends BaseTest {
 
     @Test
