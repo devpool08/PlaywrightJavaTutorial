@@ -5,12 +5,6 @@ on:
   pull_request:
     branches: [ main, master ]
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-  actions: read
-
 jobs:
   test:
     timeout-minutes: 60
@@ -59,45 +53,41 @@ jobs:
           path: target/allure-results/
           retention-days: 20
 
-  # Fixed report generation using manual Allure installation
-  publish-report:
+  # Simplified report generation
+  generate-report:
     runs-on: ubuntu-latest
     needs: test
     if: always()
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      # Download all allure-results
+      # Download all test results
       - name: Download Ubuntu Results
         uses: actions/download-artifact@v4
         with:
           name: allure-results-ubuntu-latest
-          path: allure-results-ubuntu
+          path: allure-results
         continue-on-error: true
 
       - name: Download macOS Results
         uses: actions/download-artifact@v4
         with:
           name: allure-results-macos-latest
-          path: allure-results-macos
+          path: allure-results
         continue-on-error: true
 
-      # Combine all results
-      - name: Combine Allure Results
+      # Debug: Check what we have
+      - name: List allure results
         run: |
-          mkdir -p combined-allure-results
-          if [ -d "allure-results-ubuntu" ]; then
-            cp -r allure-results-ubuntu/* combined-allure-results/ 2>/dev/null || true
-          fi
-          if [ -d "allure-results-macos" ]; then
-            cp -r allure-results-macos/* combined-allure-results/ 2>/dev/null || true
-          fi
-          echo "Combined results:"
-          ls -la combined-allure-results/
+          echo "Contents of allure-results:"
+          ls -la allure-results/ || echo "No allure-results directory found"
+          find . -name "*.json" -type f | head -5
 
-      # Install Allure manually
-      - name: Install Allure
+      # Install Allure
+      - name: Setup Allure
         run: |
           wget -q https://github.com/allure-framework/allure2/releases/download/2.25.0/allure-2.25.0.tgz
           tar -xzf allure-2.25.0.tgz
@@ -105,34 +95,22 @@ jobs:
           sudo ln -s /opt/allure/bin/allure /usr/bin/allure
           allure --version
 
-      # Get previous report history
-      - name: Get Allure history
-        uses: actions/checkout@v4
-        continue-on-error: true
-        with:
-          ref: gh-pages
-          path: gh-pages-backup
-
-      - name: Copy history
-        continue-on-error: true
+      # Generate report
+      - name: Generate Allure report
         run: |
-          if [ -d "gh-pages-backup/history" ]; then
-            cp -r gh-pages-backup/history combined-allure-results/
+          if [ -d "allure-results" ] && [ "$(ls -A allure-results)" ]; then
+            allure generate allure-results -o allure-report --clean
+            echo "Report generated successfully"
+          else
+            echo "No allure results found, creating empty report"
+            mkdir -p allure-report
+            echo "<h1>No test results found</h1>" > allure-report/index.html
           fi
 
-      # Generate Allure report manually
-      - name: Generate Allure Report
-        run: |
-          allure generate combined-allure-results -o allure-report --clean
-          echo "Report generated successfully"
-          ls -la allure-report/
-
-      # Deploy to GitHub Pages using peaceiris action
+      # Deploy using the most reliable method
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
-        if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: allure-report
-          keep_files: false
-          publish_branch: gh-pages
+          force_orphan: true
