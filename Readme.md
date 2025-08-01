@@ -721,8 +721,6 @@ dropdowns and dynamic content tomorrow!** ✨
 
 ---
 
-Certainly! Here’s an even **better and more detailed README section for Day 4**, explaining Playwright Trace Viewer with rich commentary on your two screenshots. This version focuses on step-by-step navigation inside Trace Viewer, explains its real value for debugging, and gives each screenshot a clear, professional breakdown.
-
 ## 📅 Day 4: Playwright Trace Viewer 🔍✨
 *“Debug smarter, not harder.”*
 
@@ -942,5 +940,595 @@ Day 4: ✅ Debugging with Trace Viewer and CI Integration with GitHub Actions
 ```
 
 **🎉 With CI integration, every code push is validated instantly—catching bugs early and building trust in your automation pipeline! Automation just leveled up.**
+
+---
+
+## 📅 Day 5: 🤖 Playwright Code Generation (Codegen) - Your AI Test Writer
+
+*"Why write tests manually when you can record them like a movie director?"*
+
+Today we explored one of Playwright's most **game-changing features**: **Code Generation (Codegen)**! 🎬 This incredible tool records your browser interactions in real-time and automatically converts them into production-ready Java test code. No more guessing locators or struggling with complex element selections—just click, type, and watch the magic happen! ✨
+
+### 🎯 **What We Mastered**
+
+- 🎥 **Interactive Test Recording**: Record user actions as executable Java code
+- 🎯 **Smart Locator Generation**: AI-powered element identification with resilient selectors
+- ✅ **Built-in Assertion Recording**: Visual assertion creation without coding
+- 🔄 **Multi-Language Support**: Generate code in Java, JavaScript, Python, C#
+- 🎪 **Live Code Preview**: See your test script building in real-time
+- 🛠️ **Locator Playground**: Fine-tune and test selectors interactively
+
+### 🚀 **How to Launch Playwright Codegen**
+
+#### **Command Syntax**[1]
+```bash
+mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="codegen demo.playwright.dev/todomvc"
+```
+
+#### **Breaking Down the Command**
+- **`mvn exec:java`** - Execute Java class via Maven
+- **`com.microsoft.playwright.CLI`** - Playwright's command-line interface
+- **`codegen`** - The code generation command
+- **URL (optional)** - Target website to record; can be added later in browser
+
+### 🎬 **Recording Process: Step by Step**
+
+1. **Launch Codegen** - Two windows open: Browser + Inspector
+2. **Interact Naturally** - Click, type, navigate as a real user would
+3. **Watch Code Generate** - Every action becomes Java code instantly
+4. **Add Assertions** - Use toolbar to verify text, visibility, values
+5. **Copy & Use** - Export generated code directly to your IDE
+
+## 🖼️ **Screenshots: Codegen in Action**
+
+### 1️⃣ **Playwright Inspector Interface - Recording in Progress**
+
+![Playwright Codegen Interface](resources/images/CodeGen1.png)
+
+- 🎥 **Recording Controls (Top Toolbar)**:
+    - **Record Button** - Start/stop action recording (currently active - red dot)
+    - **Pick Locator** - Interactive element selector tool
+    - **Assert Visibility/Text/Value** - Add verification checkpoints
+    - **Language Dropdown** - Switch between Java/JavaScript/Python/C# output
+
+- 💻 **Live Code Window (Left Panel)**:
+    - Real-time Java test code generation
+    - Shows `page.navigate()`, `page.click()`, `page.fill()` methods
+    - **Copy Button** - Export code directly to clipboard
+    - **Clear Button** - Reset recording for fresh start
+
+- 🌐 **Target Browser (Right Panel)**:
+    - Live website interaction area
+    - Every click/type here generates corresponding Java code
+    - Visual feedback shows which elements are being targeted
+
+**Why it's powerful:**  
+This interface eliminates the learning curve for Playwright syntax. New automation engineers can create robust tests immediately without memorizing APIs or struggling with complex locators!
+
+### 2️⃣ **Generated Java Code & Locator Intelligence**
+
+![Generated Java Code Output📝 ](resources/images/CodeGen2.png)
+
+- **Playwright initialization** - `Playwright.create()`
+- **Browser launch** - `playwright.chromium().launch()`
+- **Page creation** - `browser.newPage()`
+- **Navigation** - `page.navigate(URL)`
+
+- 🎯 **Smart Locator Strategy**:
+    - **Role-based locators** - `getByRole("button", new Page.GetByRoleOptions().setName("Get started"))`
+    - **Text-based targeting** - Prioritizes visible text over fragile CSS selectors
+    - **Resilient selectors** - Auto-improves locators to avoid flakiness[1]
+
+- ✅ **Built-in Best Practices**:
+    - **Resource management** - Proper cleanup with try-with-resources
+    - **Modern Playwright syntax** - Uses latest Java APIs
+    - **Readable code structure** - Clean, maintainable test patterns
+
+**Why it's powerful:**  
+Notice how the generated code uses `getByRole()` instead of XPath or CSS selectors. This creates more stable tests that survive UI changes - exactly what professional test automation demands!
+
+## 🔧 **Advanced Codegen Features**
+
+### **Assertion Generation** ✅
+```java
+// Click toolbar "Assert Text" then click element - generates:
+assertThat(page.getByRole("heading")).hasText("Todo MVC");
+
+// Click "Assert Visibility" - generates:
+assertThat(page.getByRole("button")).isVisible();
+```
+
+### **Locator Playground** 🎪
+- **Interactive Testing**: Test locators before using them
+- **Hover Highlighting**: See exactly which elements match your selector
+- **Real-time Editing**: Modify and validate locators instantly[1]
+
+### **Multi-Language Export** 🌍
+Switch between:
+- **Java** - For TestNG/JUnit integration
+- **JavaScript** - For Node.js projects
+- **Python** - For pytest frameworks
+- **C#** - For .NET test suites
+
+## 💡 **Pro Tips for Effective Codegen Usage**
+
+### **Recording Best Practices** 🎯
+- **Start Simple**: Record basic happy path flows first
+- **Add Assertions**: Use toolbar to verify critical elements
+- **Clean Sessions**: Use "Clear" between different test scenarios
+- **Meaningful Interactions**: Perform realistic user journeys
+
+### **Code Enhancement** 🛠️
+- **Extract Variables**: Replace hardcoded values with parameters
+- **Add Comments**: Document complex user flows
+- **Modularize**: Break long recordings into smaller, focused tests
+- **Error Handling**: Add try-catch for production readiness
+
+### **Locator Optimization** 🎪
+- **Prefer Built-in Methods**: `getByRole()` > `locator(xpath)`
+- **Test Stability**: Use "Pick Locator" to validate selectors
+- **Avoid Fragile Patterns**: Stay away from position-based selectors
+
+## 🌟 **Real-World Applications**
+
+### **Perfect Use Cases** 🎭
+- **Regression Test Creation** - Record critical user paths
+- **API Documentation** - Show how UI interactions work
+- **Team Onboarding** - Help new members understand application flows
+- **Bug Reproduction** - Record steps that trigger issues
+
+### **Time Savings** ⏰
+- **75% Faster** - Versus manual test writing
+- **Zero Learning Curve** - No Playwright syntax memorization needed
+- **Immediate Results** - Working tests in minutes, not hours
+
+## 🔮 **What's Coming Next in Day 6**
+
+### **Page Object Model (POM)** 🏗️
+- **Scalable Test Architecture** - Organize generated code professionally
+- **Reusable Components** - Turn recorded actions into modular methods
+- **Maintainable Test Suites** - Structure for enterprise-level automation
+
+### **Advanced Test Patterns** 🎪
+- **Data-Driven Testing** - Parameterize recorded flows
+- **Test Configuration** - Environment-specific test execution
+- **Parallel Execution** - Run multiple recorded tests simultaneously
+
+## 💻 **Generated Code Integration**
+
+### **From Codegen to Production** 🚀
+```java
+// Generated code becomes:
+@Test
+public void testUserRegistration() {
+    // Paste generated code here
+    page.navigate("https://demo.app/register");
+    page.getByRole("textbox", new Page.GetByRoleOptions().setName("Email")).fill("test@example.com");
+    page.getByRole("button", new Page.GetByRoleOptions().setName("Sign Up")).click();
+    assertThat(page.getByText("Welcome")).isVisible();
+}
+```
+
+## 📊 **Skills Unlocked Today**
+
+- ✅ **Visual Test Recording** - Browser-to-code automation
+- ✅ **Smart Locator Generation** - AI-powered element targeting
+- ✅ **Interactive Assertion Creation** - Visual verification setup
+- ✅ **Multi-language Code Export** - Platform flexibility
+- ✅ **Locator Playground Mastery** - Advanced selector testing
+- ✅ **Professional Code Structure** - Production-ready patterns
+
+## 🌟 **Why Codegen is Revolutionary**
+
+### **Democratizes Test Automation** 🌍
+- **No Programming Background Needed** - Anyone can create tests
+- **Visual Learning** - See code generation in real-time
+- **Instant Feedback** - Know immediately if tests work
+- **Best Practice Enforcement** - Generated code follows Playwright standards
+
+### **Accelerates Development** ⚡
+- **Rapid Prototyping** - Explore application flows quickly
+- **Documentation Tool** - Visual proof of how features work
+- **Regression Prevention** - Turn manual testing into automated suites
+- **Knowledge Transfer** - Share recorded workflows with team
+
+## 📈 **Progress Tracker**
+
+```
+Day 1: ✅ Setup & Installation Complete
+Day 2: ✅ First Test & Browser Mastery  
+Day 3: ✅ Input Handling & Forms
+Day 4: ✅ Debugging with Trace Viewer
+Day 5: ✅ AI-Powered Code Generation with Codegen
+Day 6: 🔄 Next - Page Object Model & Test Architecture!
+```
+
+## 🎬 **Reference**
+[📺 Playwright Codegen Documentation](https://playwright.dev/java/docs/codegen-intro)
+
+**🚀 With Codegen, we've transformed from code writers to test directors! Point, click, record - and watch as AI creates professional test automation. Ready to architect these recordings into scalable test suites!** ✨
+
+---
+
+# 📅 Day 5 (contd): Screenshot Automation Magic with Playwright Java 📸✨
+
+Today, we mastered the art of *screen capturing* for web automation—empowering our tests with robust debugging, documentation, and visual validation. Playwright allows you to capture **everything:** single elements, the whole page, or just the region you care about. Let's see how!
+
+## 🎯 What We Learned & Achieved
+
+- 📸 **Take crisp, high-fidelity screenshots** at any step of your test flow
+- 🗂️ **Save full-page, element, or masked screenshots** for maximum clarity and privacy
+- 🔒 **Mask sensitive data** directly in screenshots—perfect for demoing without exposure
+- 🧩 **Automate screenshot and trace capture for failed tests** (with Allure reporting)
+- 🚦 **Debug visually:** Attach images and traces to test reports for easy failure triage
+
+## 🚀 Key Screenshot Use Cases
+
+### 1. **Element Screenshot**
+**Purpose:** Document and validate *only* the element of interest (button, field, popup)  
+**Use cases:** UI regression, pixel-perfect checks, bug reports
+
+![Element Screenshot Example🖼️](resources/images/Screenshots(element).png)
+- Only the chosen element is snapped—focusing the test on what truly matters.
+- Great for confirming “this button was visible/correctly styled at failure.”
+
+### 2. **Full Page Screenshot**
+**Purpose:** Capture the entire scrollable page (not just the viewable part)  
+**Use cases:** Layout changes, A/B testing, responsive UI validation
+
+![Full Page Screenshot 🌐](resources/images/Screenshots(full%20page).png)
+
+**_In this screenshot:_**
+- You see ALL of the page—the header, footer, scrolled content, hidden ads, error messages… everything!
+- Critical for regressions that only appear “below the fold”.
+
+### 3. **Masked Element Screenshot**
+**Purpose:** Hide sensitive info (like credentials) in screenshots  
+**Use cases:**
+- Reporting bugs without revealing user data
+- Demoing login flows or forms
+- Attaching screenshots in Allure or CI without oversharing private info
+
+![Masked Element Screenshot (Sensitive Data Blurred)🕶️](resources/images/Screenshots(MaskElement).png)
+- Notice how specific form fields or regions are blurred or blanked-out—your secrets stay safe while everything else is visible!
+- Perfect for *safe* bug/feature reports.
+
+## 🧑💻 **How to Capture Each Screenshot in Playwright Java**
+
+### **Element Screenshot**
+
+```java
+Locator myButton = page.locator("#unique-button");
+myButton.screenshot(new Locator.ScreenshotOptions()
+    .setPath(Paths.get("target/screenshots/button.png")));
+```
+
+### **Full Page Screenshot**
+
+```java
+page.screenshot(new Page.ScreenshotOptions()
+    .setPath(Paths.get("target/screenshots/fullpage.png"))
+    .setFullPage(true));
+```
+
+### **Masked Screenshot**
+
+```java
+Locator sensitiveInput = page.locator("#password");
+page.screenshot(new Page.ScreenshotOptions()
+    .setMask(Arrays.asList(sensitiveInput))
+    .setPath(Paths.get("target/screenshots/masked.png")));
+```
+
+## 💾 **Supercharged: Smart Screenshot & Trace Capture on Test Failure**
+
+With your custom utility, every failing test automatically attaches:
+- 🖼️ **Full-page screenshot** (visual proof of the failure)
+- 🕵️ **Playwright trace ZIP file** (step-by-step browser actions for deep debugging)
+- 📝 **Allure Report attachments** for both screenshot **and** trace
+
+### **Your Implementation – At a Glance:**
+```java
+public static void captureScreenshotAndTraceIfFailed(Page page, BrowserContext context, ... ) {
+    if (result.getStatus() == ITestResult.FAILURE) {
+        // 1. Save Playwright trace to target/traces/.zip
+        context.tracing().stop(new Tracing.StopOptions()
+            .setPath(Paths.get(tracePath)));
+        // 2. Capture full (or region/element) screenshot
+        byte[] screenshot = page.screenshot(screenshotOptions.setFullPage(true));
+        // 3. Attach to Allure
+        Allure.addAttachment("Screenshot", "image/png", ...);
+        Allure.addAttachment("Trace", "application/zip", ...);
+    }
+}
+```
+*— This means every error report is visual, actionable, and fast to debug!*
+
+## 🌟 **Real-World Advantages**
+
+- 🕵️ **Debug twice as fast** — With screenshots and traces, find broken locators, flaky UI, or API errors instantly.
+- 🤝 **Team Collaboration** — Attach visuals to bug tickets, PRs, and documentation for easy comms.
+- 🚨 **Fail-safe CI** — No more “works on my machine”; everyone gets the same visual log.
+- 🔐 **Security by design** — Mask data so you don’t leak secrets, ever.
+
+## 📝 **Extra Tips**
+
+- 💡 Use `page.screenshot()` with `setFullPage(false)` to get only the viewport (what's visible on screen).
+- 💡 Use `.setMask()` to pass a *list of locators* for redaction—multiple secrets handled at once!
+- 💡 Attach both the screenshot and trace ZIP to your reports for “show and tell debugging.”
+
+## 🎥 **Video Reference**
+
+[📺 How To Capture Screenshots | Playwright Java Tutorial](https://www.youtube.com/watch?v=gaCP9mSwUW4)
+
+## 📈 **Progress Tracker**
+
+```
+Day 1: ✅ Setup & Installation Complete
+Day 2: ✅ First Test & Browser Mastery  
+Day 3: ✅ Input Handling & Forms
+Day 4: ✅ Trace Viewer & Debugging
+Day 5: ✅ Screenshots, Masking & Smart Reporting
+Day 6: 🔄 (Upcoming) – Modularizing with Page Object Model
+```
+
+**🚀 With screenshots and tracing in Playwright Java, you catch more bugs with less guesswork—turning failures into actionable, visual, and *secured* documentation!**
+
+---
+
+
+## 📅 Day 5 (continued): 🎬 Video Recording & Test Execution Capture
+
+*"Watch your tests unfold like a movie - frame by frame perfection!"*
+
+After mastering screenshots and codegen, we've now unlocked another powerful debugging weapon: **Video Recording**! 🎥 Playwright can record your entire test execution as a video file, giving you a complete visual timeline of what happened during your automation. No more guessing games - see exactly how your test behaved!
+
+### 🎯 **What We Accomplished**
+
+- 🎬 **Complete Test Execution Recording** - Capture every action as a video
+- 📐 **Customizable Video Quality** - Set resolution for optimal clarity vs file size
+- 📂 **Organized Video Storage** - Automatically save videos in structured folders
+- 🔍 **Enhanced Debugging** - Visual proof of test behavior for faster issue resolution
+- 💾 **WebM Format Output** - Lightweight, high-quality video format
+- ⚙️ **Context-Level Recording** - Record per browser context for better organization
+
+### 🛠️ **Implementation: Video Recording Setup**
+
+#### **Basic Video Recording Configuration**
+```java
+// Create browser context with video recording enabled
+BrowserContext context = browser.newContext(new Browser.NewContextOptions()
+    .setRecordVideo(new RecordVideoOptions()
+        .setDir(Paths.get("videos"))  // Save to 'videos' folder
+    )
+);
+
+// Your test execution here...
+Page page = context.newPage();
+page.navigate("https://ecommerce-playground.lambdatest.io/");
+// ... test steps ...
+
+// Proper cleanup to ensure video is saved
+page.close();
+context.close();
+browser.close();
+playwright.close();
+```
+
+#### **Enhanced Video Recording with Quality Control**
+```java
+// High-definition video recording with custom resolution
+BrowserContext context = browser.newContext(new Browser.NewContextOptions()
+    .setRecordVideo(new RecordVideoOptions()
+        .setDir(Paths.get("videos"))
+        .setSize(new RecordVideoSize(1280, 720))  // HD 720p quality
+    )
+);
+```
+
+### 📊 **Video Quality Comparison**
+
+| Resolution | Quality | File Size | Use Case |
+|------------|---------|-----------|----------|
+| **Default** | Standard | ~560KB | Quick debugging |
+| **1280x720** | HD 720p | ~850KB | Detailed analysis |
+| **1920x1080** | Full HD | ~1.2MB | Presentation quality |
+| **Custom** | Variable | Variable | Specific requirements |
+
+### 🎥 **Video Recording Features**
+
+#### **1. Complete Test Flow Capture** 🎬
+- **Every Action Recorded**: Clicks, typing, navigation, form submissions
+- **Real-Time Execution**: See actual browser behavior as it happens
+- **Timing Visibility**: Understand test execution speed and bottlenecks
+- **Visual Validation**: Confirm UI changes and element interactions
+
+#### **2. WebM Format Benefits** 📱
+- **Lightweight**: Smaller file sizes compared to MP4
+- **High Quality**: Excellent compression without quality loss
+- **Browser Compatible**: Playable in all modern browsers
+- **Fast Processing**: Quick encoding during test execution
+
+#### **3. Debugging Advantages** 🔍
+- **Visual Timeline**: See exactly when tests slow down or fail
+- **Element Interaction**: Watch how locators find and interact with elements
+- **Network Behavior**: Observe page loading and AJAX responses
+- **Unexpected Behaviors**: Catch timing issues and race conditions
+
+### 💡 **Pro Tips for Video Recording**
+
+#### **Performance Optimization** ⚡
+```java
+// Balance quality vs performance
+.setRecordVideo(new RecordVideoOptions()
+    .setDir(Paths.get("videos"))
+    .setSize(new RecordVideoSize(1280, 720))  // Good balance
+)
+```
+
+#### **Conditional Recording** 🎯
+```java
+// Record only on test failures
+@AfterMethod
+public void tearDown(ITestResult result) {
+    if (result.getStatus() == ITestResult.FAILURE) {
+        // Video automatically saved on context close
+        context.close();
+    }
+}
+```
+
+#### **Organized Storage** 📂
+```java
+// Create organized video folders
+String videoPath = "videos/" + testClassName + "/" + testMethodName;
+.setRecordVideo(new RecordVideoOptions()
+    .setDir(Paths.get(videoPath))
+)
+```
+
+### 🌟 **Real-World Applications**
+
+#### **Debugging Scenarios** 🕵️
+- **Flaky Tests**: See exactly why tests pass/fail inconsistently
+- **Timing Issues**: Identify slow page loads or element appearances
+- **Cross-Browser Differences**: Compare behavior across different browsers
+- **Element Visibility**: Confirm when elements become visible/clickable
+
+#### **Documentation & Training** 📚
+- **Test Documentation**: Visual proof of test coverage
+- **Team Training**: Show new team members how tests work
+- **Bug Reports**: Attach videos to JIRA tickets for clarity
+- **Stakeholder Demos**: Present test automation capabilities
+
+#### **CI/CD Integration** 🚀
+- **Failure Analysis**: Automatically capture videos of failed CI runs
+- **Performance Monitoring**: Track test execution speed over time
+- **Environment Debugging**: Compare test behavior across environments
+- **Regression Testing**: Visual comparison of feature changes
+
+### 🔧 **Advanced Video Recording Patterns**
+
+#### **Test-Specific Recording** 🎪
+```java
+public class VideoRecordingTest {
+    private BrowserContext context;
+    
+    @BeforeMethod
+    public void setupWithVideo() {
+        context = browser.newContext(new Browser.NewContextOptions()
+            .setRecordVideo(new RecordVideoOptions()
+                .setDir(Paths.get("videos/" + this.getClass().getSimpleName()))
+                .setSize(new RecordVideoSize(1920, 1080))
+            )
+        );
+    }
+    
+    @Test
+    public void complexUserJourney() {
+        Page page = context.newPage();
+        // Your test implementation
+    }
+    
+    @AfterMethod
+    public void cleanup() {
+        context.close(); // Video saved automatically
+    }
+}
+```
+
+#### **Combined Video + Screenshot + Trace** 🎭
+```java
+// Ultimate debugging setup
+BrowserContext context = browser.newContext(new Browser.NewContextOptions()
+    .setRecordVideo(new RecordVideoOptions()
+        .setDir(Paths.get("videos"))
+        .setSize(new RecordVideoSize(1280, 720))
+    )
+);
+
+// Start tracing for detailed step analysis
+context.tracing().start(new Tracing.StartOptions()
+    .setScreenshots(true)
+    .setSnapshots(true)
+    .setSources(true)
+);
+
+// Your test execution...
+
+// Stop tracing and save everything
+context.tracing().stop(new Tracing.StopOptions()
+    .setPath(Paths.get("traces/test-trace.zip"))
+);
+```
+
+### 📈 **Integration with Test Reports**
+
+#### **Allure Report Integration** 📊
+```java
+@AfterMethod
+public void attachVideoToReport(ITestResult result) {
+    if (result.getStatus() == ITestResult.FAILURE) {
+        // Get video path (automatically created by Playwright)
+        Path videoPath = context.page().video().path();
+        
+        // Attach to Allure report
+        Allure.addAttachment("Test Execution Video", "video/webm", 
+            Files.newInputStream(videoPath), ".webm");
+    }
+}
+```
+
+### 🔮 **What's Coming Next in Day 6**
+
+#### **Page Object Model (POM)** 🏗️
+- **Scalable Test Architecture** - Organize video-recorded tests professionally
+- **Modular Test Design** - Create reusable components for complex flows
+- **Maintainable Test Suites** - Structure for enterprise automation
+
+#### **Advanced Test Patterns** 🎪
+- **Data-Driven Testing** - Parameterized test execution with video recording
+- **Parallel Test Execution** - Multiple video recordings simultaneously
+- **Custom Test Frameworks** - Building robust automation architectures
+
+### 📊 **Skills Unlocked Today**
+
+- ✅ **Complete Video Recording Setup** - Browser context configuration
+- ✅ **Quality Control Management** - Resolution and file size optimization
+- ✅ **Debugging Enhancement** - Visual test execution analysis
+- ✅ **Storage Organization** - Structured video file management
+- ✅ **Performance Optimization** - Balanced quality vs speed
+- ✅ **Integration Patterns** - Video + Screenshot + Trace combination
+- ✅ **Report Enhancement** - Video attachments to test reports
+
+### 🌟 **Why Video Recording is Revolutionary**
+
+#### **Visual Debugging** 👁️
+- **See What Happened**: No more guessing about test failures
+- **Timing Analysis**: Identify slow operations and bottlenecks
+- **Behavior Validation**: Confirm expected vs actual application behavior
+- **Cross-Browser Comparison**: Visual differences across browsers
+
+#### **Team Collaboration** 🤝
+- **Shared Understanding**: Everyone sees exactly what tests do
+- **Remote Debugging**: Share videos instead of lengthy explanations
+- **Knowledge Transfer**: Visual documentation of complex test flows
+- **Quality Assurance**: Proof of test coverage and reliability
+
+## 📈 **Progress Tracker**
+
+```
+Day 1: ✅ Setup & Installation Complete
+Day 2: ✅ First Test & Browser Mastery  
+Day 3: ✅ Input Handling & Forms
+Day 4: ✅ Debugging with Trace Viewer
+Day 5: ✅ Screenshots, Codegen & Video Recording Mastery
+Day 6: 🔄 Next - Page Object Model & Test Architecture!
+```
+
+## 🎬 **Reference**
+[📺 How To Record Test Execution Videos | PlaywrightCodegen | Part VI](https://www.youtube.com/watch?v=zurNNWSgzqg&t=738s)
+
+**🚀 With video recording, we've transformed our tests from code executions into visual stories! Every test run is now a movie that tells exactly what happened - making debugging faster, collaboration easier, and test maintenance a breeze!** ✨
 
 ---
