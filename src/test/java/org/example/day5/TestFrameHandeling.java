@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 @Severity(SeverityLevel.NORMAL)
 @Category("Sanity")
 public class TestFrameHandeling extends BaseTest {
+
     @Test
     public void openPage() {
         try {
