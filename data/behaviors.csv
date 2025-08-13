@@ -1,0 +1,7 @@
+"Epic","Feature","Story","FAILED","BROKEN","PASSED","SKIPPED","UNKNOWN"
+"Handle Inputs","Handle Inputs","Tester can handle simple input boxes, two-way data binding, and checkboxes/radio buttons","0","0","5","0","0"
+"Trace Viewer Tests","Trace Viewer","Tester can view traces of their actions on the page","0","0","2","0","0"
+"Lunch Browser","Lunching Browser and Navigation","Tester can launch the browser and navigate to a page","0","0","1","0","0"
+"Frame Handling Tests","Frame Handling","Tester can handle frames on the page","0","0","2","0","0"
+"Handle Dropdowns","Handle Dropdowns","Tester can handle single and multi-select dropdowns","0","0","3","0","0"
+"Screenshot Tests","Screenshot Functionality","Tester can take screenshots of the page and failed tests","0","1","0","0","0"
