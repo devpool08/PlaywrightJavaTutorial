@@ -1,5 +1,6 @@
 # 🎭 Playwright Java Automation Testing Journey
 
+
 ## 📅 Day 1: Introduction & Installation Setup
 
 Welcome to my **Playwright Java** automation testing adventure! 🚀 This is where it all begins - from zero to hero with
