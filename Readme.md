@@ -1479,6 +1479,7 @@ public void attachVideoToReport(ITestResult result) {
 }
 ```
 
+
 ### 🔮 **What's Coming Next in Day 6**
 
 #### **Page Object Model (POM)** 🏗️
